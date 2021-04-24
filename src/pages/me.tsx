@@ -1,5 +1,5 @@
 import { GetServerSidePropsWithSession } from '../common/types'
-import { PrismaClient } from '@prisma/client';
+import prisma from '../common/db';
 
 const Index = ({ user_id, username}: any) => {
     return <div>{user_id}:{username}</div>
@@ -11,7 +11,6 @@ export const getServerSideProps: GetServerSidePropsWithSession = async (context)
     let props: any = {};
     let { user_id: id } = context.req.session;
     if (id) {
-        const prisma = new PrismaClient();
         let user = await prisma.user.findUnique({where:{id}})
         if (user) props.username = user?.username;
 

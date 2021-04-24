@@ -1,8 +1,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
-import { PrismaClient } from '@prisma/client';
+import prisma from '../common/db';
 
-const prisma = new PrismaClient();
 const router = express.Router();
 
 router.use(express.json());
