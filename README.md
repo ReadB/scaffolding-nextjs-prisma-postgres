@@ -17,3 +17,8 @@ npm run watch
 ```bash
 heroku local
 ```
+
+### Create and apply migrations
+```bash
+npx prisma migrate dev
+```

@@ -1,18 +1,19 @@
-import { GetServerSideProps } from 'next';
+import { GetServerSidePropsWithSession } from '../common/types'
 
-type Props = {
-    index_variable: string | null
-}
-const Index = ({ index_variable }: Props) => {
-    return <div>{index_variable}</div>
+const Index = () => {
+    return <div></div>
 }
 
 export default Index;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    return {
-        props: {
-            index_variable: process.env.INDEX_VARIABLE || null
-        }
+export const getServerSideProps: GetServerSidePropsWithSession = async (context) => {
+    let { user_id } = context.req.session;
+    if (user_id) {
+        context.res.writeHead(302, { Location: '/me' })
+        context.res.end()
+    } else {
+        context.res.writeHead(302, { Location: '/login' })
+        context.res.end()
     }
+    return { props: {} }
 }

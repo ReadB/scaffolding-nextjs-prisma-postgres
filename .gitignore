@@ -17,3 +17,7 @@
 
 # debug
 npm-debug.log*
+
+# data
+
+/var
